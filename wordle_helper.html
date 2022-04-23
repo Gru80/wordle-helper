@@ -26,6 +26,11 @@
 				border-radius: 8px;
 			}
 
+			.tcontainer {
+				margin-left: auto;
+  				margin-right: auto;
+			}
+
 			.gbutton {
 				width:  fit-content;
 				margin: 15px;
@@ -50,15 +55,6 @@
 				padding: 20px;
 			}
 
-			.result {
-				font-family: courier;
-				border-width: 0;
-				border-style: solid;
-				padding: 5px;
-				margin: 15px;
-				width:  fit-content;
-				font-size: 150%;	
-			}
 
 			input {
 				font-size: 150%;
@@ -72,6 +68,22 @@
 
 			.hits {
 				font-size: 75%;
+			}
+
+			table {
+				font-family: courier;
+				padding: 5px;
+				margin: 15px;
+				width:  fit-content;
+				font-size: 150%;	
+			}
+
+			table tr:nth-child(even) td{
+				background-color: #eeeeee;
+    
+			}
+			table tr:nth-child(odd) td{
+				background-color: #ffffff;
 			}
 		</style>
 
@@ -98,7 +110,6 @@ window.onload =  () => {
 
 function upper(event) {
 	current = this;
-	console.log(event.keyCode);
 	switch(event.keyCode) {
 		case 37:
 			if (current.previousElementSibling) {
@@ -133,29 +144,35 @@ function getResults() {
 	const l3 = i3.value||'.';
 	const l4 = i4.value||'.';
 	const l5 = i5.value||'.';
-	const rList = document.getElementById("results");
+	const rTable = document.getElementById("rtable");
 	const rHits = document.getElementById("hits");
 	const regex = l1 + l2 + l3 + l4 + l5;
 	let hit = 0;
-	rList.innerHTML = "";
+	rTable.innerHTML = "";
 	rHits.innerHTML = "";
 	let rString = "";
 
 	array.forEach((i) => {
 		
 		if(match = i.match(regex)) {
+			var tr = document.createElement('tr');
+			var td = document.createElement('td');
+			td.appendChild(document.createTextNode(i));
+			tr.appendChild(td);
+			rTable.appendChild(tr);
 			hit++;
-			rString += i + "<BR>";
 		};
 	});
-
+	
 	if (hit) {
-		rList.style.borderWidth = "thin";
-		rList.innerHTML = rString;
-		rHits.innerHTML = "<p>Hits: " + hit + "</p>";
-		console.log("hits: " + hit);
-	} else {
-		rList.innerHTML = "<p style='color:red'>No match!</p>";
+		rHits.innerHTML = hit + " results:";
+	} else	{
+		var tr = document.createElement('tr');
+		var td = document.createElement('td');
+		td.appendChild(document.createTextNode("No result!"));
+		tr.appendChild(td);
+		rTable.appendChild(tr);
+		rHits.innerHTML = "";
 	}
 }
 
@@ -176,6 +193,7 @@ function getResults() {
 			</div>
 			<div class="hits" id="hits"></div>
 			<div class="result" id="results"></div>
+			<div class="tcontainer"><table id="rtable" class="rtable"></table></div>
 			<div class="footer">
 				<hr>
 				<p>How to use:<p>
