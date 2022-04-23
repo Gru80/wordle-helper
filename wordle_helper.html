@@ -12,7 +12,7 @@
 				align-items: center;
 				background: #f0f0f0;
 				font-family: Geneva, sans-serif;
-				color: darkblue;
+				color: navy;
 			}
 
 			.container {
@@ -28,22 +28,26 @@
 
 			.gbutton {
 				width:  fit-content;
+				margin: 15px;
 				padding: 10px 30px 10px 30px;
 				border-radius: 8px;
 				font-size: 150%;
 			}
 
 			.footer {
-				color: darkblue;
+				color: navy;
 				font-family: verdana;
 				font-size: 75%;
 			}
 
-			h1 {
+			.top {
 				font-size: 37px;
 				font-family: 'Times New Roman', Times, serif;
 				font-weight: bolder;
-				letter-spacing: -0.03em;				
+				letter-spacing: -0.03em;
+				font-stretch: ultra-condensed;
+				text-align: center;
+				padding: 20px;
 			}
 
 			.result {
@@ -57,8 +61,8 @@
 			}
 
 			input {
-				font-size: 200%;
-				width: 40px;
+				font-size: 150%;
+				width: 25px;
 				text-align: center;
 				border-width: 2px;
 				border-style: solid;
@@ -108,7 +112,7 @@ function upper(event) {
 			break;
 		default:
 			obj = document.activeElement;
-			if ((/[a-zA-Z]/).test(obj.value)) {
+			if ((/[a-zA-ZäöüÄÖÜ]/).test(obj.value)) {
 				obj.value = obj.value.toUpperCase();
 				obj.select();
 				if (current.nextElementSibling) {
@@ -159,7 +163,7 @@ function getResults() {
 	</head>
 	<body>
 		<div class="container">
-			<h1 style="text-align:center">Wordle Helper</h1>
+			<div class=top>Wordle Helper</div>
 			<div class="inputs" style="text-align:center">
 				<input type="text" id="l1" name="l1" maxlength="1" size="1" onfocus="this.select();">
 				<input type="text" id="l2" name="l2" maxlength="1" size="1" onfocus="this.select();">
