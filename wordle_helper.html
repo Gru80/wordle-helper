@@ -139,40 +139,38 @@ function checkempty(event) {
 }
 
 function upper(event) {
-	current = this;
 	switch(event.keyCode) {
 		case 37:
 			// On <left key> select the previous element
-			if (current.previousElementSibling) {
-				current.previousElementSibling.focus();
+			if (this.previousElementSibling) {
+				this.previousElementSibling.focus();
 			}
 			break;
 		case 39:
 			// On <right key> select the next element
-			if (current.nextElementSibling) {
-				current.nextElementSibling.focus();
+			if (this.nextElementSibling) {
+				this.nextElementSibling.focus();
 			}
 			break;
 		case 8:
 			// On <backspace> If the text box is empty - select the previous one,
 			// if not - just delete the text in it
-			if (emptytext && current.previousElementSibling) {
-				current.previousElementSibling.focus();				
+			if (emptytext && this.previousElementSibling) {
+				this.previousElementSibling.focus();				
 			} else {
 				emptytext = true;
 			}
 			break;
 		default:
-			obj = document.activeElement;
-			if ((/[a-zA-ZäöüÄÖÜÑñ]/).test(obj.value)) {
-				obj.value = obj.value.toUpperCase();
-				obj.select();
-				if (current.nextElementSibling) {
-					current.nextElementSibling.focus();
+			if ((/[a-zA-ZäöüÄÖÜÑñ]/).test(this.value)) {
+				this.value = this.value.toUpperCase();
+				this.select();
+				if (this.nextElementSibling) {
+					this.nextElementSibling.focus();
 				}
 			} else {
-				obj.value = '';
-				obj.select();
+				this.value = '';
+				this.select();
 			}
 		break;
 	}
