@@ -63,7 +63,7 @@
 				border-width: 2px;
 				border-style: solid;
 				border-color: rgb(145, 145, 145);
-				
+				text-transform: uppercase;				
 			}
 
 			.hits {
@@ -114,6 +114,7 @@
 				border-width: 1px;
 				border-style: solid;
 				border-color: rgb(145, 145, 145);
+				text-transform: uppercase;
 			}
 
 		</style>
@@ -147,7 +148,7 @@ window.onload =  () => {
 	i4.addEventListener('focus', checkempty, false);
 	i5.addEventListener('focus', checkempty, false);
 
-	skipinput.addEventListener('focusout', upper);
+	//skipinput.addEventListener('focusout', upper);
 
 	i1.select();
 }
@@ -182,7 +183,7 @@ function upper(event) {
 			break;
 		default:
 			if ((/[a-zA-ZäöüÄÖÜÑñ]/).test(this.value)) {
-				this.value = this.value.toUpperCase();
+				//this.value = this.value.toUpperCase();
 				this.select();
 				if (this.nextElementSibling) {
 					this.nextElementSibling.focus();
@@ -239,13 +240,13 @@ function getResults() {
 
 	// Pre-Filter words
 	array.forEach((i) => {
-		if(match = i.match(regex)) {
+		if(match = i.match(regex.toUpperCase())) {
 			filtered.push(i);
 		};
 	});
 
 	// Filter words with excluded characters
-	let filterstring = skipinput.value;
+	let filterstring = skipinput.value.toUpperCase();
 	console.log("Filter string: " + filterstring);
 	filtered.forEach((j) => {
 		let go = true;
