@@ -55,15 +55,23 @@
 				padding: 20px;
 			}
 
-
+			@media (max-height: 600px)
 			.letter {
-				font-size: 150%;
-				width: 25px;
+			font-size: 1em;
+			line-height: 1em;
+			}
+			.letter {
+				width: 40px;
+				height: 40px;
 				text-align: center;
 				border-width: 2px;
 				border-style: solid;
 				border-color: rgb(145, 145, 145);
-				text-transform: uppercase;				
+				text-transform: uppercase;
+				font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+        		font-size: 16px;
+				font-weight: bold;
+				color: white;
 			}
 
 			.hits {
@@ -148,9 +156,25 @@ window.onload =  () => {
 	i4.addEventListener('focus', checkempty, false);
 	i5.addEventListener('focus', checkempty, false);
 
+	// Used for smart handling of the backspace key
+	i1.addEventListener('focusout', colorize, false);
+	i2.addEventListener('focusout', colorize, false);
+	i3.addEventListener('focusout', colorize, false);
+	i4.addEventListener('focusout', colorize, false);
+	i5.addEventListener('focusout', colorize, false);
+
 	//skipinput.addEventListener('focusout', upper);
 
 	i1.select();
+}
+
+function colorize(event) {
+	if (this.value === '') {
+		this.style.backgroundColor = 'white';
+	}
+	else {
+		this.style.backgroundColor = "rgb(121,168,107)";
+	}
 }
 
 function checkempty(event) {
