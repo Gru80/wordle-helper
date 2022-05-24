@@ -1,0 +1,116 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f0f0;
+    font-family: Geneva, sans-serif;
+    color: navy;
+}
+
+.container {
+    background: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.tcontainer {
+    margin-left: auto;
+      margin-right: auto;
+}
+
+.gbutton {
+    width:  fit-content;
+    margin: 15px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 8px;
+    font-size: 150%;
+}
+
+.footer {
+    color: navy;
+    font-family: verdana;
+    font-size: 75%;
+}
+
+.top {
+    font-size: 37px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    letter-spacing: -0.03em;
+    font-stretch: ultra-condensed;
+    text-align: center;
+    padding: 20px;
+}
+
+.letter {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(211, 214, 218);
+    text-transform: uppercase;
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+}
+
+.hits {
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+    font-family: courier;
+    margin: 15px;
+    width:  fit-content;
+    font-size: 150%;
+    letter-spacing: 0.2em;
+    border-width: 2px;
+    border-color: #eeeeee;
+    border-style: solid;
+
+}
+
+table tr:nth-child(even) td{
+    background-color: #eeeeee;
+    padding: 0px 15px 0px 15px;
+
+}
+table tr:nth-child(odd) td{
+    background-color: #ffffff;
+    padding: 0px 15px 0px 15px;
+}
+
+.lcontainer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.skipcontainer {
+    margin-left: auto;
+      margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.skipinput {
+    font-size: 100%;
+    text-align: left;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(145, 145, 145);
+    text-transform: uppercase;
+}
