@@ -20,6 +20,14 @@
 				<input class="letter" type="text" id="l4" name="l4" maxlength="1" size="1" onfocus="this.select();">
 				<input class="letter" type="text" id="l5" name="l5" maxlength="1" size="1" onfocus="this.select();">
 			</div>
+
+			<div class="skipcontainer">				
+				<input class="skipinput" type="text" id="skips" name="skips" maxlength="30" size="20" placeholder="excluded letters">
+			</div>
+
+			<div class="includecontainer">				
+				<input class="includeinput" type="text" id="goods" name="goods" maxlength="30" size="20" placeholder="included letters">
+			</div>
 			<div class="lcontainer">
 				<label for="lang">Language:</label>
 				<select id="language">
@@ -27,9 +35,6 @@
 					<option value="de">Deutsch</option>
 					<option value="es">Español</option>
 				</select>
-			</div>
-			<div class="skipcontainer">Exclude Letters:				
-				<input class="skipinput" type="text" id="skips" name="skips" maxlength="30" size="20" placeholder="XYZ (optional)" onfocus="this.select();">
 			</div>
 			<div class="dbutton" style="text-align:center">
 				<button type="button" class="gbutton" onclick="getResults();">Get Words</button>
@@ -45,6 +50,8 @@
 					<li>Fill in the letters with know position - leave others blank<BR>
 					Use &#8592; and &#8594; arrow keys to navigate</li>
 					<li>Enter already ruled out letters in "Exclude Letters" list (optional)</li>
+					<li>Enter letters where you know they part of the word (optional)</li>
+					<li>Choose the desired language</li>
 					<li>Click "Get Words" to show all remaining possibilities</li>
 				</ul>
 				<p>2022 by <a href="https://github.com/Gru80/wordle-helper/" target="_blank">Martin Eder</a><br>
