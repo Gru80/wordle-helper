@@ -1,17 +1,18 @@
 
 let i1, i2, i3, i4, i5;
+let skipinput, goodinput;
 
 // This is used for smart handling of the backspace key
 let emptytext = true;
 
 window.onload =  () => {
-	i1 = document.getElementById("l1");
-	i2 = document.getElementById("l2");
-	i3 = document.getElementById("l3");
-	i4 = document.getElementById("l4");
-	i5 = document.getElementById("l5");
-	skipinput = document.getElementById("skips");
-	goodinput = document.getElementById("goods");
+	i1 = document.getElementById('l1');
+	i2 = document.getElementById('l2');
+	i3 = document.getElementById('l3');
+	i4 = document.getElementById('l4');
+	i5 = document.getElementById('l5');
+	skipinput = document.getElementById('skips');
+	goodinput = document.getElementById('goods');
 
 	i1.addEventListener('keyup', upper, false);
 	i2.addEventListener('keyup', upper, false);
@@ -43,7 +44,7 @@ function colorize(event) {
 		this.style.backgroundColor = 'white';
 	}
 	else {
-		this.style.backgroundColor = "rgb(121,168,107)";
+		this.style.backgroundColor = 'rgb(121,168,107)';
 	}
 }
 
@@ -79,7 +80,7 @@ function upper(event) {
 		default:
 			if ((/[a-zA-ZäöüÄÖÜÑñ]/).test(this.value)) {
 				//this.value = this.value.toUpperCase();
-                this.style.backgroundColor = "rgb(121,168,107)";
+                this.style.backgroundColor = 'rgb(121,168,107)';
 
 				this.select();
 				if (this.nextElementSibling) {
@@ -93,7 +94,6 @@ function upper(event) {
 	}
 }
 
-
 function getResults() {
 	const l1 = i1.value||'.';
 	const l2 = i2.value||'.';
@@ -101,129 +101,107 @@ function getResults() {
 	const l4 = i4.value||'.';
 	const l5 = i5.value||'.';
 	const regex = l1 + l2 + l3 + l4 + l5;
-	const rTable = document.getElementById("rtable");
-	const rHits = document.getElementById("hits");
-	const lSelect = document.getElementById("language");
+	const rTable = document.getElementById('rtable');
+	const rHits = document.getElementById('hits');
+	const lSelect = document.getElementById('language');
 	let lval = lSelect.options[lSelect.selectedIndex].value;
-	//let array = (lval === "en") ? array_en : array_de;
+	//let array = (lval === 'en') ? array_en : array_de;
 	let hit = 0;
-	rTable.innerHTML = "";
-	rHits.innerHTML = "";
-	let rString = "";
+	rTable.innerHTML = '';
+	rHits.innerHTML = '';
+	let rString = '';
 	let array;
 	let filtered = [];
 	let filtered2 = [];
-	let finalresult = [];
 		
 	// Choose selected language
 	switch (lval) {
 		case 'en': 
 			array = array_en;
-			console.log("Selected englisch");
+			console.log('Selected englisch');
 			break;
 		case 'de':
 			array = array_de;
-			console.log("Selected german");
+			console.log('Selected german');
 			break;
 		case 'es':
 			array = array_es;
-			console.log("Selected spanish");
+			console.log('Selected spanish');
 			break;
 		default:
-			console.log("Unknown language: " + lval);
+			console.log('Unknown language: ' + lval);
 			array = array_en;
-			console.log("Selected englisch");
 			break;
 	}
 
-	// Pre-Filter words
+	// Pre-Filter words by letters with known position
 	array.forEach((i) => {
 		if(match = i.match(regex.toUpperCase())) {
 			filtered.push(i);
 		};
 	});
 
-	// Filter words with excluded characters
+	// Filter words by excluded characters
 	let filterstring = skipinput.value.toUpperCase();
     if (filterstring !== '') {
-		console.log("filtering skips: " + filterstring)
+		console.log('Filtering excluded characters: ' + filterstring)
 		filtered.forEach((j) => {
 			let go = true;
 			for (const f of filterstring) {
 				if (j.indexOf(f) >= 0) {
-					console.log("Skipping: " + j + " due to exclusion");
 					go = false;
 				}
 			}
 
 			if (go) {
-				//finalresult.push(j);
 				filtered2.push(j);
-				/*
-				let tr = document.createElement('tr');
-				let td = document.createElement('td');
-				td.appendChild(document.createTextNode(j));
-				tr.appendChild(td);
-				rTable.appendChild(tr);
-				hit++;
-				*/
 			}
 		});
 	} else {
-		console.log("Skipping skips");
+		console.log('Skipping skips');
 		filtered2 = filtered;
 	}
 
+	// Filter words by included characters
 	let filterstring2 = goodinput.value.toUpperCase();
 	if (filterstring2 !== '') {
-		console.log ("Filering good cases:" + filterstring2);
+		console.log ('Filtering included characters:' + filterstring2);
 		filtered2.forEach((k) => {
 			let goodvalid = false;
-			console.log(" now:" + k)
 			for (const g of filterstring2) {
-				console.log("  now:" + g)
 				if (k.indexOf(g) >= 0) {
-					console.log("  ->hit")
 					goodvalid = true;
 				} else {
-					console.log("  ->nohit")
 					goodvalid = false;
 					break;
 				}
-					//finalresult.push(k);
-
 			}
 
 			if (goodvalid) {
-				let tr = document.createElement('tr');
-				let td = document.createElement('td');
-				td.appendChild(document.createTextNode(k));
-				tr.appendChild(td);
-				rTable.appendChild(tr);
+				addResultRow(k, rTable);
 				hit++;
 			}
 		});
 	} else {
-		console.log ("Skipping good cases");
+		console.log ('No included characters - skipping filter');
 		filtered2.forEach((k) => {
-			let tr = document.createElement('tr');
-			let td = document.createElement('td');
-			td.appendChild(document.createTextNode(k));
-			tr.appendChild(td);
-			rTable.appendChild(tr);
+			addResultRow(k, rTable);
 			hit++;
 		})
 	}
-
 	
 	if (hit) {
-		rHits.innerHTML = hit + " results:";
+		rHits.innerHTML = hit + ' results:';
 	} else	{
-		let tr = document.createElement('tr');
-		let td = document.createElement('td');
-		td.appendChild(document.createTextNode("No result!"));
-		tr.appendChild(td);
-		rTable.appendChild(tr);
-		rHits.innerHTML = "";
+		addResultRow('No Results!', rTable);
+		rHits.innerHTML = '';
 	}
+}
+
+function addResultRow(txt, rTable) {
+	let tr = document.createElement('tr');
+	let td = document.createElement('td');
+	td.appendChild(document.createTextNode(txt));
+	tr.appendChild(td);
+	rTable.appendChild(tr);
 }
