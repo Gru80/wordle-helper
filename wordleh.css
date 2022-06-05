@@ -121,6 +121,7 @@ table tr:nth-child(odd) td{
     color: white;
     font-weight: bold;
     padding: 4px;
+    letter-spacing: 0.25em;
 }
 
 .includeinput {
@@ -131,6 +132,5 @@ table tr:nth-child(odd) td{
     color: white;
     font-weight: bold;
     padding: 4px;
-    display: none;
-
+    letter-spacing: 0.25em;
 }

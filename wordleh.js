@@ -11,6 +11,7 @@ window.onload =  () => {
 	i4 = document.getElementById("l4");
 	i5 = document.getElementById("l5");
 	skipinput = document.getElementById("skips");
+	goodinput = document.getElementById("goods");
 
 	i1.addEventListener('keyup', upper, false);
 	i2.addEventListener('keyup', upper, false);
@@ -111,6 +112,7 @@ function getResults() {
 	let rString = "";
 	let array;
 	let filtered = [];
+	let filtered2 = [];
 	let finalresult = [];
 		
 	// Choose selected language
@@ -143,28 +145,75 @@ function getResults() {
 
 	// Filter words with excluded characters
 	let filterstring = skipinput.value.toUpperCase();
-	console.log("Filter string: " + filterstring);
-	filtered.forEach((j) => {
-		let go = true;
-		for (const f of filterstring) {
-			if (j.indexOf(f) >= 0) {
-				console.log("Skipping: " + j + " due to exclusion");
-				go = false;
+    if (filterstring !== '') {
+		console.log("filtering skips: " + filterstring)
+		filtered.forEach((j) => {
+			let go = true;
+			for (const f of filterstring) {
+				if (j.indexOf(f) >= 0) {
+					console.log("Skipping: " + j + " due to exclusion");
+					go = false;
+				}
 			}
-		}
 
-		if (go) {
-			//finalresult.push(j);
+			if (go) {
+				//finalresult.push(j);
+				filtered2.push(j);
+				/*
+				let tr = document.createElement('tr');
+				let td = document.createElement('td');
+				td.appendChild(document.createTextNode(j));
+				tr.appendChild(td);
+				rTable.appendChild(tr);
+				hit++;
+				*/
+			}
+		});
+	} else {
+		console.log("Skipping skips");
+		filtered2 = filtered;
+	}
+
+	let filterstring2 = goodinput.value.toUpperCase();
+	if (filterstring2 !== '') {
+		console.log ("Filering good cases:" + filterstring2);
+		filtered2.forEach((k) => {
+			let goodvalid = false;
+			console.log(" now:" + k)
+			for (const g of filterstring2) {
+				console.log("  now:" + g)
+				if (k.indexOf(g) >= 0) {
+					console.log("  ->hit")
+					goodvalid = true;
+				} else {
+					console.log("  ->nohit")
+					goodvalid = false;
+					break;
+				}
+					//finalresult.push(k);
+
+			}
+
+			if (goodvalid) {
+				let tr = document.createElement('tr');
+				let td = document.createElement('td');
+				td.appendChild(document.createTextNode(k));
+				tr.appendChild(td);
+				rTable.appendChild(tr);
+				hit++;
+			}
+		});
+	} else {
+		console.log ("Skipping good cases");
+		filtered2.forEach((k) => {
 			let tr = document.createElement('tr');
 			let td = document.createElement('td');
-			td.appendChild(document.createTextNode(j));
+			td.appendChild(document.createTextNode(k));
 			tr.appendChild(td);
 			rTable.appendChild(tr);
 			hit++;
-		}
-
-	});
-	
+		})
+	}
 
 	
 	if (hit) {
