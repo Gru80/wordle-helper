@@ -1,7 +1,7 @@
 # Wordle Helper
 A tool that helps you out when you are stuck with your wordle riddle
 
-![screenshot](wh.png)
+<img src="wh.png" width="200" >
 
 # How to Use
 * Fill in the letters with known position in the letter boxes
